@@ -6,6 +6,9 @@ on:
     branches: [main]
   workflow_dispatch: # Enables manual trigger
 
+permissions:
+  contents: write
+
 env:
   GODOT_VERSION: 4.3
   EXPORT_NAME: vampire-survivors-like
@@ -45,4 +48,5 @@ jobs:
         with:
           branch: gh-pages # The branch the action should deploy to.
           folder: build/web # The folder the action should deploy to.
+          token: ${{ secrets.GITHUB_TOKEN }}
           
