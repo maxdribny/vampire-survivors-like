@@ -1,0 +1,30 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+.import/
+.export/
+
+# OS-Specific
+.DS_Store
+Thumbs.db
+
+# If you have an exported build folder
+build/
+export/
+
+# Other non-essential caches or log files
+*.log
+
+# Editor backup files
+*.tmp
+*.swap
+*~
+*.autosave
+
+# IDE Specific
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
