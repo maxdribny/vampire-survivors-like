@@ -27,7 +27,7 @@ jobs:
       - name: Export Game (HTML5)
         run: |
           mkdir -p build
-          ./Godot_v4.3-stable_linux.x86_64 --headless --export "HTML5" build/index.html
+          ./Godot_v4.3-stable_linux.x86_64 --headless --export-release "HTML5" build/index.html
 
       - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3
