@@ -28,3 +28,6 @@ export/
 *.user
 *.userosscache
 *.sln.docstates
+
+# Misc
+README.md
