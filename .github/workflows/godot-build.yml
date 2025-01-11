@@ -3,8 +3,7 @@ name: Godot CI/CD - Deploy to Github Pages
 on:
   pull_request:
     types: [closed]
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch: # Enables manual trigger
 
 jobs:
@@ -17,14 +16,14 @@ jobs:
 
       - name: Install Godot
         run: |
-          wget https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_win64.exe.zip
-          unzip Godot_v4.3-stable_win64.exe.zip
-          chmod +x godot/Godot_v4.3-stable_win64_console.exe
+          wget https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux_headless.64.zip
+          unzip Godot_v4.3-stable_linux_headless.64.zip
+          chmod +x Godot_v4.3-stable_linux_headless.64
 
       - name: Export Game (HTML5)
         run: |
           mkdir -p build
-          godot/Godot_v4.3-stable_win64_console.exe --headless --export "HTML5" build/index.html ./build/index.html
+          ./Godot_v4.3-stable_linux_headless.64 --headless --export "HTML5" build/index.html
 
       - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3
