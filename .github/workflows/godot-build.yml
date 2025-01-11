@@ -16,14 +16,18 @@ jobs:
 
       - name: Install Godot
         run: |
-          wget https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux_headless.64.zip
-          unzip Godot_v4.3-stable_linux_headless.64.zip
-          chmod +x Godot_v4.3-stable_linux_headless.64
+          wget https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
+          
+          # Unzip to current directory
+          unzip Godot_v4.3-stable_linux.x86_64.zip
+
+          # Make sure it's executable (should be named Godot_v4.3-stable_linux.x86_64
+          chmod +x Godot_v4.3-stable_linux.x86_64
 
       - name: Export Game (HTML5)
         run: |
           mkdir -p build
-          ./Godot_v4.3-stable_linux_headless.64 --headless --export "HTML5" build/index.html
+          ./Godot_v4.3-stable_linux.x86_64 --headless --export-release "HTML5" build/index.html
 
       - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3
