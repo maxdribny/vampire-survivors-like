@@ -1,0 +1,33 @@
+name: Godot CI/CD - Deploy to Github Pages
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+  workflow_dispatch: # Enables manual trigger
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.2.2
+
+      - name: Install Godot
+        run: |
+          wget https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_win64.exe.zip
+          unzip Godot_v4.3-stable_win64.exe.zip
+          chmod +x godot/Godot_v4.3-stable_win64_console.exe
+
+      - name: Export Game (HTML5)
+        run: |
+          mkdir -p build
+          godot/Godot_v4.3-stable_win64_console.exe --headless --export "HTML5" build/index.html ./build/index.html
+
+      - name: Deploy to Github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
