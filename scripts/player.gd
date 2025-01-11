@@ -16,20 +16,28 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 	if velocity.length() > 0.0:
-		get_node("HappyBoo").play_walk_animation()
+		$HappyBoo.play_walk_animation()
+	else:
+		$HappyBoo.play_idle_animation()
 
+	# region Debug stuff
 	if Input.is_action_just_pressed("debug_toggle"):
 		debug_show_collision_box(not debug_draw_enabled)
 
 	if Input.is_action_just_pressed("exit"):
-		get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
-		print_debug("Closing the application")
-		get_tree().quit()
+		exit()
+
+	# endregion
 
 func debug_show_collision_box(_flag: bool) -> void:
 	debug_draw_enabled = _flag
 	if collision_debug_drawer:
 		collision_debug_drawer.visible = debug_draw_enabled
+
+func exit() -> void:
+	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
+	print_debug("Closing the application")
+	get_tree().quit()
 
 class CollisionDebugDrawer:
 	extends Node2D
